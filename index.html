@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALL IN — Премиальный массажный салон</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- VIDEO BACKGROUND -->
+<video class="video-background" autoplay loop muted playsinline>
+    <source src="images/BG.mp4" type="video/mp4">
+</video>
+<div class="video-overlay"></div>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="logo">
+            <img src="images/logo.png" alt="ALL IN">
+        </div>
+        <div class="header-right">
+            <div class="language">
+                <button class="lang-btn">RU <span>▼</span></button>
+                <div class="lang-dropdown">
+                    <div data-lang="ru">Русский</div>
+                    <div data-lang="en">English</div>
+                    <div data-lang="kz">Қазақша</div>
+                </div>
+            </div>
+            <button class="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- MENU OVERLAY & SIDE MENU -->
+    <div class="menu-overlay"></div>
+    <nav class="side-menu">
+        <a href="#hero">Главная</a>
+        <a href="#advantages">Преимущества</a>
+        <a href="#services">Услуги и цены</a>
+        <a href="#contacts">Контакты</a>
+        <a href="#about">О салоне</a>
+        <a href="#gallery">Галерея</a>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="hero reveal">
+        <div class="hero-content">
+            <h1>ALL IN</h1>
+            <div class="hero-line"></div>
+            <p>Премиальный сервис, комфорт и конфиденциальность<br>24 часа в сутки</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn tg-btn">Telegram</a>
+                <a href="#" class="btn wp-btn">WhatsApp</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ADVANTAGES SECTION -->
+    <section id="advantages" class="advantages reveal">
+        <div class="section-title">
+            <h2>Преимущества</h2>
+        </div>
+        <div class="advantages-grid">
+            <div class="adv-card">
+                <h3>Конфиденциальность</h3>
+                <p>Полное уважение личного пространства каждого гостя.</p>
+            </div>
+            <div class="adv-card">
+                <h3>Индивидуальный подход</h3>
+                <p>Каждая программа подбирается индивидуально.</p>
+            </div>
+            <div class="adv-card">
+                <h3>Премиальный сервис</h3>
+                <p>Высокие стандарты обслуживания и внимание к деталям.</p>
+            </div>
+            <div class="adv-card">
+                <h3>Комфортная атмосфера</h3>
+                <p>Уютное пространство для отдыха и расслабления.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="services" class="services reveal">
+        <div class="section-title">
+            <h2>Услуги и цены</h2>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Relax Massage</h3>
+                <span>40 минут</span>
+                <strong>30 000 ₸</strong>
+            </div>
+            <div class="service-card">
+                <h3>Classic Massage</h3>
+                <span>60 минут</span>
+                <strong>50 000 ₸</strong>
+            </div>
+            <div class="service-card">
+                <h3>Premium Massage</h3>
+                <span>90 минут</span>
+                <strong>70 000 ₸</strong>
+            </div>
+            <div class="service-card">
+                <h3>Luxury Experience</h3>
+                <span>120 минут</span>
+                <strong>90 000 ₸</strong>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTS SECTION -->
+    <section id="contacts" class="contacts reveal">
+        <div class="section-title">
+            <h2>Контакты</h2>
+        </div>
+        <div class="contacts-grid">
+            <a href="#" class="contact-card telegram">
+                <img src="images/tg.png" alt="Telegram">
+                <span>+7 778 638 47 85</span>
+            </a>
+            <a href="#" class="contact-card whatsapp">
+                <img src="images/wp.png" alt="WhatsApp">
+                <span>+7 778 638 47 85</span>
+            </a>
+            <div class="contact-card schedule">
+                <h3>Круглосуточно</h3>
+                <p>24 / 7</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="about reveal">
+        <div class="section-title">
+            <h2>О салоне</h2>
+        </div>
+        <p>ALL IN — пространство для отдыха, комфорта и высокого уровня сервиса.<br>Мы уделяем внимание каждой детали, чтобы каждый визит оставлял исключительно приятные впечатления.</p>
+    </section>
+
+    <!-- GALLERY SECTION -->
+    <section id="gallery" class="gallery reveal">
+        <div class="section-title">
+            <h2>Галерея</h2>
+        </div>
+        <div class="masonry">
+            <img src="images/slide1.jpg" alt="Gallery image 1">
+            <img src="images/slide2.jpg" alt="Gallery image 2">
+            <img src="images/slide3.jpg" alt="Gallery image 3">
+            <img src="images/slide4.jpg" alt="Gallery image 4">
+            <img src="images/slide5.jpg" alt="Gallery image 5">
+            <img src="images/slide6.jpg" alt="Gallery image 6">
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <img src="images/logo.png" alt="ALL IN">
+        <p>© 2026 ALL IN</p>
+        <span>Все права защищены</span>
+    </footer>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox">
+        <span class="close-lightbox">×</span>
+        <img src="" alt="Lightbox image">
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
