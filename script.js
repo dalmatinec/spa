@@ -1,62 +1,175 @@
-/* ==========================
-BURGER MENU
-========================== */
+/* =========================================
+   SMOOTH REVEAL ANIMATION
+========================================= */
 
-const burger =
-document.querySelector(".burger");
+const reveals = document.querySelectorAll(".reveal");
 
-const sideMenu =
-document.querySelector(".side-menu");
+const revealObserver = new IntersectionObserver(
+(entries) => {
 
-const menuOverlay =
-document.querySelector(".menu-overlay");
+    entries.forEach(entry => {
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("show");
+
+        }
+
+    });
+
+},
+{
+    threshold:0.15
+});
+
+reveals.forEach(item => {
+    revealObserver.observe(item);
+});
+
+
+/* =========================================
+   BURGER MENU
+========================================= */
+
+const burger = document.querySelector(".burger");
+const menu = document.querySelector(".fullscreen-menu");
+const overlay = document.querySelector(".menu-overlay");
+const closeBtn = document.querySelector(".close-menu");
+
+function openMenu(){
+
+    menu.classList.add("active");
+    overlay.classList.add("active");
+
+    document.body.style.overflow = "hidden";
+}
 
 function closeMenu(){
-  if(sideMenu) sideMenu.classList.remove("active");
-  if(menuOverlay) menuOverlay.classList.remove("active");
+
+    menu.classList.remove("active");
+    overlay.classList.remove("active");
+
+    document.body.style.overflow = "";
 }
 
-if(burger && sideMenu && menuOverlay){
+burger?.addEventListener("click", openMenu);
 
-burger.addEventListener("click",()=>{
+closeBtn?.addEventListener("click", closeMenu);
 
-sideMenu.classList.toggle("active");
+overlay?.addEventListener("click", closeMenu);
 
-menuOverlay.classList.toggle("active");
 
-});
-
-}
-
-if(menuOverlay){
-
-menuOverlay.addEventListener("click",()=>{
-
-closeMenu();
-
-});
-
-}
-
-/* ==========================
-CLOSE MENU AFTER CLICK
-========================== */
+/* =========================================
+   CLOSE MENU AFTER CLICK LINK
+========================================= */
 
 document
-.querySelectorAll(".side-menu a")
-.forEach(link=>{
+.querySelectorAll(".fullscreen-menu a")
+.forEach(link => {
 
-link.addEventListener("click",()=>{
+    link.addEventListener("click", () => {
 
-closeMenu();
+        closeMenu();
+
+    });
 
 });
 
+
+/* =========================================
+   GALLERY SLIDER
+========================================= */
+
+const track =
+document.querySelector(".gallery-track");
+
+const next =
+document.querySelector(".gallery-next");
+
+const prev =
+document.querySelector(".gallery-prev");
+
+const card =
+document.querySelector(".gallery-track img");
+
+if(track && card){
+
+    const scrollAmount =
+    card.offsetWidth + 20;
+
+    next?.addEventListener("click", () => {
+
+        track.scrollBy({
+
+            left:scrollAmount,
+
+            behavior:"smooth"
+
+        });
+
+    });
+
+    prev?.addEventListener("click", () => {
+
+        track.scrollBy({
+
+            left:-scrollAmount,
+
+            behavior:"smooth"
+
+        });
+
+    });
+
+}
+
+
+/* =========================================
+   TOUCH SWIPE GALLERY
+========================================= */
+
+let startX = 0;
+let endX = 0;
+
+track?.addEventListener("touchstart", e => {
+
+    startX = e.changedTouches[0].clientX;
+
 });
 
-/* ==========================
-LANGUAGE SWITCHER
-========================== */
+track?.addEventListener("touchend", e => {
+
+    endX = e.changedTouches[0].clientX;
+
+    const diff = startX - endX;
+
+    if(Math.abs(diff) < 50) return;
+
+    const scrollAmount =
+    card.offsetWidth + 20;
+
+    if(diff > 0){
+
+        track.scrollBy({
+            left:scrollAmount,
+            behavior:"smooth"
+        });
+
+    }else{
+
+        track.scrollBy({
+            left:-scrollAmount,
+            behavior:"smooth"
+        });
+
+    }
+
+});
+
+
+/* =========================================
+   LANGUAGE MENU
+========================================= */
 
 const langBtn =
 document.querySelector(".lang-btn");
@@ -64,388 +177,151 @@ document.querySelector(".lang-btn");
 const langDropdown =
 document.querySelector(".lang-dropdown");
 
-if(langBtn && langDropdown){
+langBtn?.addEventListener("click", () => {
 
-langBtn.addEventListener("click",(e)=>{
-
-e.stopPropagation();
-
-langDropdown.classList.toggle("active");
+    langDropdown.classList.toggle("active");
 
 });
 
-}
 
-document.addEventListener("click",(e)=>{
+/* =========================================
+   CLOSE LANGUAGE MENU
+========================================= */
 
-if(langDropdown && !e.target.closest(".language")){
+document.addEventListener("click", (e) => {
 
-langDropdown.classList.remove("active");
+    if(
+        !e.target.closest(".language")
+    ){
 
-}
+        langDropdown?.classList.remove("active");
+
+    }
 
 });
+
+
+/* =========================================
+   SIMPLE LANGUAGE SWITCH
+========================================= */
 
 const translations = {
 
 ru:{
-
-heroText:
-"Премиальный сервис, комфорт и конфиденциальность 24 часа в сутки",
-
-advantages:
-"Преимущества",
-
-services:
-"Услуги и цены",
-
-contacts:
-"Контакты",
-
-about:
-"О салоне",
-
-gallery:
-"Галерея"
-
+hero:"Премиальный сервис, комфорт и конфиденциальность 24 часа в сутки"
 },
 
 en:{
-
-heroText:
-"Premium service, comfort and confidentiality 24 hours a day",
-
-advantages:
-"Advantages",
-
-services:
-"Services & Prices",
-
-contacts:
-"Contacts",
-
-about:
-"About",
-
-gallery:
-"Gallery"
-
+hero:"Premium service, comfort and privacy 24 hours a day"
 },
 
 kz:{
-
-heroText:
-"Тәулік бойы жоғары деңгейдегі сервис, жайлылық және құпиялылық",
-
-advantages:
-"Артықшылықтар",
-
-services:
-"Қызметтер мен бағалар",
-
-contacts:
-"Байланыс",
-
-about:
-"Салон туралы",
-
-gallery:
-"Галерея"
-
+hero:"Тәулік бойы премиум сервис, жайлылық және құпиялылық"
 }
 
 };
 
-function applyLanguage(lang){
-
-localStorage.setItem(
-"siteLanguage",
-lang
-);
-
-const current =
-translations[lang] || translations.ru;
-
-const heroTextEl =
-document.querySelector(".hero p");
-
-if(heroTextEl){
-heroTextEl.textContent =
-current.heroText;
-}
-
-const titles =
-document.querySelectorAll(
-".section-title h2"
-);
-
-if(titles[0])
-titles[0].textContent =
-current.advantages;
-
-if(titles[1])
-titles[1].textContent =
-current.services;
-
-if(titles[2])
-titles[2].textContent =
-current.contacts;
-
-if(titles[3])
-titles[3].textContent =
-current.about;
-
-if(titles[4])
-titles[4].textContent =
-current.gallery;
-
-if(langBtn){
-
-langBtn.innerHTML =
-lang.toUpperCase() +
-" <span>▼</span>";
-
-}
-
-}
-
 document
-.querySelectorAll("[data-lang]")
-.forEach(item=>{
+.querySelectorAll(".lang-dropdown div")
+.forEach(item => {
 
-item.addEventListener("click",()=>{
+item.addEventListener("click", () => {
 
-applyLanguage(
-item.dataset.lang
-);
+    const lang =
+    item.dataset.lang;
 
-if(langDropdown)
-langDropdown.classList.remove("active");
+    localStorage.setItem(
+    "site_language",
+    lang
+    );
 
-});
-
-});
-
-applyLanguage(
-
-localStorage.getItem(
-"siteLanguage"
-) || "ru"
-
-);
-
-/* ==========================
-REVEAL ANIMATION
-========================== */
-
-const revealElements =
-document.querySelectorAll(
-".reveal"
-);
-
-const revealObserver =
-new IntersectionObserver(
-
-(entries, observer)=>{
-
-entries.forEach(entry=>{
-
-if(entry.isIntersecting){
-
-entry.target.classList.add(
-"show"
-);
-
-observer.unobserve(entry.target);
-
-}
-
-});
-
-},
-
-{
-threshold:.15
-}
-
-);
-
-revealElements.forEach(el=>{
-
-revealObserver.observe(el);
-
-});
-
-/* ==========================
-LIGHTBOX
-========================== */
-
-const galleryImages =
-document.querySelectorAll(
-".masonry img"
-);
-
-const lightbox =
-document.querySelector(
-".lightbox"
-);
-
-const lightboxImage =
-document.querySelector(
-".lightbox img"
-);
-
-const closeLightbox =
-document.querySelector(
-".close-lightbox"
-);
-
-galleryImages.forEach(img=>{
-
-img.addEventListener("click",()=>{
-
-if(!lightbox || !lightboxImage) return;
-
-lightbox.classList.add(
-"active"
-);
-
-lightboxImage.src =
-img.src;
+    document
+    .querySelector(".lang-btn")
+    .innerHTML =
+    lang.toUpperCase() +
+    " <span>⌄</span>";
 
 });
 
 });
 
-if(closeLightbox){
 
-closeLightbox.addEventListener(
-"click",
-()=>{
+/* =========================================
+   LOAD SAVED LANGUAGE
+========================================= */
 
-if(lightbox)
-lightbox.classList.remove("active");
+window.addEventListener("load", () => {
 
-}
+    const saved =
+    localStorage.getItem(
+    "site_language"
+    );
 
-);
-}
+    if(saved){
 
-if(lightbox){
+        document
+        .querySelector(".lang-btn")
+        .innerHTML =
+        saved.toUpperCase() +
+        " <span>⌄</span>";
 
-lightbox.addEventListener(
-"click",
-(e)=>{
-
-if(
-e.target === lightbox
-){
-
-lightbox.classList.remove(
-"active"
-);
-
-}
-
-}
-);
-
-}
-
-/* ==========================
-TELEGRAM
-========================== */
-
-const telegramUrl =
-"https://t.me/YOUR_USERNAME";
-
-document
-.querySelectorAll(
-".tg-btn,.telegram"
-)
-.forEach(link=>{
-
-if(link.tagName === "A"){
-
-link.href =
-telegramUrl;
-
-link.target =
-"_blank";
-
-}
+    }
 
 });
 
-/* ==========================
-WHATSAPP
-========================== */
 
-const whatsappMessage =
-encodeURIComponent(
-"Здравствуйте. Хочу узнать подробнее об услугах ALL IN."
-);
+/* =========================================
+   HERO BUTTON LINKS
+========================================= */
 
-const whatsappUrl =
-"https://wa.me/77786384785?text=" +
-whatsappMessage;
+const tgBtn =
+document.querySelector(".telegram-btn");
 
-document
-.querySelectorAll(
-".wp-btn,.whatsapp"
-)
-.forEach(link=>{
+const wpBtn =
+document.querySelector(".whatsapp-btn");
 
-if(link.tagName === "A"){
+tgBtn?.addEventListener("click", e => {
 
-link.href =
-whatsappUrl;
+    e.preventDefault();
 
-link.target =
-"_blank";
-
-}
+    window.open(
+    "https://t.me/+77071086436",
+    "_blank"
+    );
 
 });
 
-/* ==========================
-CARD TOUCH EFFECT
-========================== */
+wpBtn?.addEventListener("click", e => {
 
-document
-.querySelectorAll(
-".adv-card,.service-card,.contact-card"
-)
-.forEach(card=>{
+    e.preventDefault();
 
-card.addEventListener(
-"touchstart",
-()=>{
+    window.open(
+    "https://wa.me/77786384785",
+    "_blank"
+    );
 
-card.style.transform =
-"translateY(-6px)";
+});
 
-card.style.boxShadow =
-"0 0 35px rgba(212,176,106,.18)";
 
-}
-);
+/* =========================================
+   HEADER SHADOW ON SCROLL
+========================================= */
 
-card.addEventListener(
-"touchend",
-()=>{
+window.addEventListener("scroll", () => {
 
-setTimeout(()=>{
+    const header =
+    document.querySelector(".header");
 
-card.style.transform =
-"";
+    if(window.scrollY > 30){
 
-card.style.boxShadow =
-"";
+        header.style.boxShadow =
+        "0 10px 30px rgba(0,0,0,.05)";
 
-},200);
+    }else{
 
-}
-);
+        header.style.boxShadow =
+        "none";
+
+    }
 
 });
